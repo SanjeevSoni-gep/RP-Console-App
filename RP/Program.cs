@@ -84,10 +84,11 @@ namespace RP
                     Console.WriteLine("Something went wrong...");
                 }
             }
-            endUrl2 = "807cf9a8-8a1b-4494-960a-2e6eb6211c03";
-            url2 = $"{baseUrl2}{endUrl2}";
-            var referenceDocScheduleId = JToken.Parse(result)["returnValue"]["woDemandSource"];
+            var referenceDocScheduleId = JToken.Parse(result)["returnValue"]["woDemandSource"][0]["referenceDocScheduleId"];
 
+            endUrl2 = referenceDocScheduleId.ToString();
+            url2 = $"{baseUrl2}{endUrl2}";
+            
             using (HttpResponseMessage response2 = await client.GetAsync(url2))
             {
                 if (response2.IsSuccessStatusCode)
